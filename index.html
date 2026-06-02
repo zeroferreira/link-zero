@@ -3,14 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#020b18" />
+    <meta name="theme-color" content="#020b18" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0e0806" media="(prefers-color-scheme: light)" />
+
+    <!-- Google Fonts: preconnect para reducir latencia -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <meta name="description" content="Zero FM — DJ, Streamer y Gamer. Música, gaming y mucho más." />
+    <!-- dns-prefetch como fallback para browsers más viejos -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Preload del peso crítico de Outfit (600 — usado en botones y labels)
+         Esto le dice al browser: descarga esta fuente YA, antes de renderizar -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC1C4G-EiAou6Y.woff2"
+      crossorigin
+    />
+
+    <!-- Stylesheet completo de Outfit (todos los pesos) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta name="description" content="Zero FM — Baterista, Streamer y Gamer. Música, vibes y gaming desde México 🎧🎮🇲🇽" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="Zero FM — Links" />
-    <meta property="og:description" content="Música · Gaming · Streaming desde México 🎧🎮" />
+    <meta property="og:description" content="Baterista, Streamer y Gamer. Música, vibes y gaming desde México 🎧🎮🇲🇽" />
     <meta property="og:image" content="/logo.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zero FM — Links" />
+    <meta name="twitter:description" content="Baterista, Streamer y Gamer. Música, vibes y gaming desde México 🎧🎮🇲🇽" />
+    <meta name="twitter:image" content="/logo.png" />
+
     <link rel="icon" type="image/png" href="/logo.png" />
     <title>Zero FM — Links</title>
   </head>

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const PALETTE = [
+const PALETTE_DARK = [
   'rgba(59,130,246,0.88)',
   'rgba(96,165,250,0.80)',
   'rgba(147,197,253,0.70)',
@@ -10,6 +10,18 @@ const PALETTE = [
   'rgba(6,182,212,0.75)',
   'rgba(255,255,255,0.55)',
   'rgba(224,231,255,0.60)',
+];
+
+const PALETTE_WARM = [
+  'rgba(249,115,22,0.85)',
+  'rgba(251,146,60,0.78)',
+  'rgba(253,186,116,0.68)',
+  'rgba(236,72,153,0.82)',
+  'rgba(244,114,182,0.75)',
+  'rgba(251,191,36,0.80)',
+  'rgba(252,211,77,0.70)',
+  'rgba(255,160,50,0.72)',
+  'rgba(255,255,255,0.50)',
 ];
 
 function sphere(r) {
@@ -24,18 +36,19 @@ function sphere(r) {
   };
 }
 
-export default function ParticleCanvas() {
+export default function ParticleCanvas({ theme = 'dark' }) {
   const canvasRef = useRef(null);
+  // Persist rotation across theme re-renders so the orb doesn't snap back to 0
+  const rotRef = useRef({ rotX: 0, rotY: 0, velX: 0.00015, velY: 0.00022 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    const PALETTE = theme === 'warm' ? PALETTE_WARM : PALETTE_DARK;
 
     let W = 0, H = 0, dpr = 1, base = 300;
     let pts = [];
-    let rotX = 0, rotY = 0;
-    let velX = 0.00015, velY = 0.00022;
     let lastT = 0;
     let rafId;
 
@@ -71,16 +84,19 @@ export default function ParticleCanvas() {
       if (!lastT) lastT = t;
       const dt = t - lastT; lastT = t;
 
-      rotX += (velX + 4e-5) * dt;
-      rotY += (velY + 9e-5) * dt;
-      velX *= 0.986;
-      velY *= 0.986;
+      const rot = rotRef.current;
+      // Minimum base velocity so the orb never fully stops
+      const MIN_VEL = 8e-5;
+      rot.velX = rot.velX * 0.986 + (rot.velX >= 0 ? MIN_VEL : -MIN_VEL) * 0.014;
+      rot.velY = rot.velY * 0.986 + (rot.velY >= 0 ? MIN_VEL : -MIN_VEL) * 0.014;
+      rot.rotX += (rot.velX + 4e-5) * dt;
+      rot.rotY += (rot.velY + 9e-5) * dt;
 
       ctx.clearRect(0, 0, W, H);
 
       const cx  = W / 2, cy = H / 2;
-      const cX  = Math.cos(rotX), sX = Math.sin(rotX);
-      const cY  = Math.cos(rotY), sY = Math.sin(rotY);
+      const cX  = Math.cos(rot.rotX), sX = Math.sin(rot.rotX);
+      const cY  = Math.cos(rot.rotY), sY = Math.sin(rot.rotY);
       const fov = base * 2.3;
       const lp  = 0.038;
       const proj = [];
@@ -114,8 +130,8 @@ export default function ParticleCanvas() {
     }
 
     function kick() {
-      velY += 0.0025 * (Math.random() > 0.5 ? 1 : -1);
-      velX += 0.0015 * (Math.random() > 0.5 ? 1 : -1);
+      rotRef.current.velY += 0.0025 * (Math.random() > 0.5 ? 1 : -1);
+      rotRef.current.velX += 0.0015 * (Math.random() > 0.5 ? 1 : -1);
     }
 
     resize();
@@ -132,7 +148,7 @@ export default function ParticleCanvas() {
       window.removeEventListener('pointerdown',       kick);
       window.removeEventListener('touchstart',        kick);
     };
-  }, []);
+  }, [theme]); // re-init on theme change — rotation state preserved via rotRef
 
   return (
     <canvas
