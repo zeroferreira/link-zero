@@ -1,0 +1,294 @@
+/* ─── Base button ─── */
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 15px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.065);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  color: #eef2ff;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow:
+    0 2px 14px rgba(0,0,0,0.36),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  /* Entrance animation */
+  opacity: 0;
+  animation: fadeUp 0.52s cubic-bezier(.22,1,.36,1) forwards;
+
+  transition:
+    transform 0.18s cubic-bezier(.34,1.56,.64,1),
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.28s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;     /* removes 300ms tap delay on iOS */
+  min-height: 58px;              /* WCAG / Apple HIG minimum tap target */
+}
+
+/* Compact layout for side-by-side buttons */
+.compact {
+  padding: 12px 14px;
+  gap: 10px;
+}
+
+.compact .arrow {
+  display: none;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top gloss */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Radial ripple highlight on hover */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--rx, 50%) var(--ry, 50%),
+    rgba(255,255,255,0.18) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.012);
+  background: rgba(255,255,255,0.10);
+}
+
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: translateY(-1px) scale(1.005); }
+
+/* ─── Icon box ─── */
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1);
+}
+
+.iconBox svg {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+  display: block;
+}
+
+.btn:hover .iconBox { transform: scale(1.12) rotate(-4deg); }
+
+/* ─── Text ─── */
+.text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 14.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.1px;
+}
+
+.sublabel {
+  font-size: 11.5px;
+  color: rgba(238,242,255,0.5);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Arrow ─── */
+.arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(238,242,255,0.48);
+  font-size: 16px;
+  transition: transform 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(2px);
+  color: #eef2ff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* ══════════════════════════════════════════
+   PLATFORM THEMES
+══════════════════════════════════════════ */
+
+/* TikTok Music */
+.theme--tiktok-music .iconBox {
+  background: linear-gradient(135deg, #ff0050, #ff375f);
+  box-shadow: 0 4px 18px rgba(255,0,80,0.40);
+}
+.theme--tiktok-music {
+  border-color: rgba(255,55,95,0.22);
+  animation: fadeUp 0.52s cubic-bezier(.22,1,.36,1) forwards, borderPulse 4.5s ease-in-out infinite 0.52s;
+}
+.theme--tiktok-music:hover {
+  border-color: rgba(255,55,95,0.45);
+  box-shadow: 0 14px 40px rgba(255,0,80,0.26), inset 0 1px 0 rgba(255,255,255,0.1);
+  animation-play-state: paused;
+}
+
+/* TikTok Gaming */
+.theme--tiktok-gaming .iconBox {
+  background: linear-gradient(135deg, #00d4ff, #7b2fff);
+  box-shadow: 0 4px 18px rgba(123,47,255,0.42);
+}
+.theme--tiktok-gaming { border-color: rgba(0,212,255,0.18); }
+.theme--tiktok-gaming:hover {
+  border-color: rgba(0,212,255,0.38);
+  box-shadow: 0 14px 40px rgba(0,212,255,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Spotify */
+.theme--spotify .iconBox {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  box-shadow: 0 4px 18px rgba(29,185,84,0.42);
+}
+.theme--spotify { border-color: rgba(30,215,96,0.18); }
+.theme--spotify:hover {
+  border-color: rgba(30,215,96,0.38);
+  box-shadow: 0 14px 40px rgba(29,185,84,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Apple Music */
+.theme--apple .iconBox {
+  background: linear-gradient(135deg, #fc3c44, #ff6b70);
+  box-shadow: 0 4px 18px rgba(252,60,68,0.42);
+}
+.theme--apple { border-color: rgba(252,60,68,0.18); }
+.theme--apple:hover {
+  border-color: rgba(252,60,68,0.38);
+  box-shadow: 0 14px 40px rgba(252,60,68,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* YouTube */
+.theme--youtube .iconBox {
+  background: linear-gradient(135deg, #ff0000, #ff4444);
+  box-shadow: 0 4px 18px rgba(255,0,0,0.40);
+}
+.theme--youtube { border-color: rgba(255,0,0,0.18); }
+.theme--youtube:hover {
+  border-color: rgba(255,0,0,0.38);
+  box-shadow: 0 14px 40px rgba(255,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .btn {
+    padding: 13px 14px;
+    gap: 12px;
+    border-radius: 18px;
+    min-height: 60px;
+  }
+  .compact {
+    padding: 10px 10px;
+    gap: 8px;
+    min-height: 52px;
+  }
+  .label    { font-size: 14px; }
+  .sublabel { font-size: 11px; }
+  .iconBox  { width: 40px; height: 40px; border-radius: 11px; }
+  .arrow    { width: 26px; height: 26px; font-size: 15px; }
+}
+
+@media (max-width: 360px) {
+  .btn      { padding: 12px 12px; gap: 10px; }
+  .compact  { padding: 8px 8px; gap: 6px; }
+  .label    { font-size: 13px; }
+  .sublabel { display: none; }   /* hide sublabel on very small screens */
+  .iconBox  { width: 36px; height: 36px; }
+  .arrow    { width: 24px; height: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { animation: none; opacity: 1; transition: none; }
+  .iconBox, .arrow { transition: none; }
+}
+
+/* Shimmer sweep effect */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  pointer-events: none;
+  z-index: 2;
+  animation: shimmerSweep 7s ease-in-out infinite;
+}
+
+@keyframes shimmerSweep {
+  0%   { left: -150%; }
+  35%  { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* Breathing neon pulse for CTA button */
+@keyframes borderPulse {
+  0% {
+    box-shadow: 0 2px 14px rgba(0,0,0,0.36), 0 0 4px rgba(255, 0, 80, 0.16);
+    border-color: rgba(255, 0, 80, 0.20);
+  }
+  50% {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.42), 0 0 14px rgba(255, 0, 80, 0.45);
+    border-color: rgba(255, 0, 80, 0.48);
+  }
+  100% {
+    box-shadow: 0 2px 14px rgba(0,0,0,0.36), 0 0 4px rgba(255, 0, 80, 0.16);
+    border-color: rgba(255, 0, 80, 0.20);
+  }
+}
