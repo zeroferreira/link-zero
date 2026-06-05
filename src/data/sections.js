@@ -91,12 +91,26 @@ export const sections = [
     label: '🎮 Gaming',
     links: [
       {
-        id:       'tiktok-gaming',
-        label:    'TikTok Gaming',
-        sublabel: 'LIVE, clips y gameplays 🥁🎮',
-        href:     'https://www.tiktok.com/@game.zer0',
-        icon:     'tiktok',
-        theme:    'tiktok-gaming',
+        type: 'row',
+        id:   'gaming-row',
+        items: [
+          {
+            id:       'tiktok-gaming',
+            label:    'TikTok Gaming',
+            sublabel: 'LIVE, clips y gameplays 🥁🎮',
+            href:     'https://www.tiktok.com/@game.zer0',
+            icon:     'tiktok',
+            theme:    'tiktok-gaming',
+          },
+          {
+            id:       'twitch',
+            label:    'Twitch',
+            sublabel: 'Transmisiones en vivo',
+            href:     'https://www.twitch.tv/zero0playz',
+            icon:     'twitch',
+            theme:    'twitch',
+          },
+        ],
       },
     ],
   },

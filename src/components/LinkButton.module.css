@@ -222,6 +222,17 @@
   box-shadow: 0 14px 40px rgba(255,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
+/* Twitch */
+.theme--twitch .iconBox {
+  background: linear-gradient(135deg, #9146ff, #a970ff);
+  box-shadow: 0 4px 18px rgba(145,70,255,0.42);
+}
+.theme--twitch { border-color: rgba(145,70,255,0.18); }
+.theme--twitch:hover {
+  border-color: rgba(145,70,255,0.38);
+  box-shadow: 0 14px 40px rgba(145,70,255,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 480px) {
   .btn {
