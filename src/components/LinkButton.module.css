@@ -233,6 +233,17 @@
   box-shadow: 0 14px 40px rgba(145,70,255,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
+/* Discord */
+.theme--discord .iconBox {
+  background: linear-gradient(135deg, #5865f2, #7289da);
+  box-shadow: 0 4px 18px rgba(88,101,242,0.42);
+}
+.theme--discord { border-color: rgba(88,101,242,0.18); }
+.theme--discord:hover {
+  border-color: rgba(88,101,242,0.38);
+  box-shadow: 0 14px 40px rgba(88,101,242,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 480px) {
   .btn {
