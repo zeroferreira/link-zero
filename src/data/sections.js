@@ -17,10 +17,10 @@
 // ─────────────────────────────────────────────────────────────────────
 
 export const sections = [
-  // ── 🎵 Música ──────────────────────────────────────────────────────
+  // ── 📹 Live ────────────────────────────────────────────────────────
   {
-    id:    'music',
-    label: '🎵 Música',
+    id:    'live',
+    label: 'Live 📹',
     links: [
       {
         type: 'row',
@@ -28,7 +28,7 @@ export const sections = [
         items: [
           {
             id:       'tiktok-music',
-            label:    'Pide una canción',
+            label:    'Pide Canción',
             sublabel: '¿Ya sabes qué pedir?',
             href:     'https://zeroferreira.github.io/ListaZero/index.html',
             icon:     'tiktok',
@@ -36,7 +36,7 @@ export const sections = [
           },
           {
             id:       'song-list',
-            label:    'Lista de peticiones',
+            label:    'Lista',
             sublabel: 'Revisa la lista hasta ahora',
             href:     'https://zeroferreira.github.io/ListaZero/lista.html',
             icon:     'tiktok',
@@ -44,6 +44,22 @@ export const sections = [
           },
         ],
       },
+      {
+        id:       'live-tops',
+        label:    'TOPs del Live',
+        sublabel: 'Mira quienes son los tops LIKES y DONADORES',
+        href:     'https://zeroferreira.github.io/ListaZero/tops.html',
+        icon:     'tiktok',
+        theme:    'tiktok-gaming',
+      },
+    ],
+  },
+
+  // ── 🎵 Música ──────────────────────────────────────────────────────
+  {
+    id:    'music',
+    label: '🎵 Música',
+    links: [
       {
         type: 'row',
         id:   'apple-spotify-row',
