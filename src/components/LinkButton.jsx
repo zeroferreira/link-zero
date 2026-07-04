@@ -1,34 +1,11 @@
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import icons from './icons';
 import styles from './LinkButton.module.css';
 
-export default function LinkButton({ href, label, sublabel, icon, theme, animDelay = 0, compact = false }) {
+export default function LinkButton({ href, label, sublabel, icon, theme, animDelay = 0, compact = false, live = false }) {
   const btnRef = useRef(null);
   const [ripples, setRipples] = useState([]);
-  const [isVisible, setIsVisible] = useState(() => typeof IntersectionObserver === 'undefined');
-
-  useEffect(() => {
-    const el = btnRef.current;
-    if (!el || typeof IntersectionObserver === 'undefined') return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      {
-        threshold: 0.05,
-        rootMargin: '0px 0px -20px 0px',
-      }
-    );
-
-    observer.observe(el);
-    return () => {
-      if (el) observer.unobserve(el);
-    };
-  }, []);
+  const isVisible = true;
 
   /* Track mouse position for the radial ripple highlight */
   const handleMouseMove = useCallback((e) => {
@@ -71,6 +48,7 @@ export default function LinkButton({ href, label, sublabel, icon, theme, animDel
   const themeClass = styles[`theme--${theme}`] ?? '';
   const compactClass = compact ? styles.compact : '';
   const visibleClass = isVisible ? styles.visible : '';
+  const liveClass = live ? styles.liveGlow : '';
 
   return (
     <a
@@ -78,7 +56,7 @@ export default function LinkButton({ href, label, sublabel, icon, theme, animDel
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${styles.btn} ${themeClass} ${compactClass} ${visibleClass}`}
+      className={`${styles.btn} ${themeClass} ${compactClass} ${visibleClass} ${liveClass}`}
       style={{ animationDelay: `${animDelay}s` }}
       onMouseMove={handleMouseMove}
       onPointerDown={handlePointerDown}
@@ -113,7 +91,15 @@ export default function LinkButton({ href, label, sublabel, icon, theme, animDel
 
       {/* Text */}
       <div className={styles.text}>
-        <span className={styles.label}>{label}</span>
+        <span className={styles.label}>
+          {label}
+          {live && (
+            <span className={styles.liveIndicator}>
+              <span className={styles.liveDot} />
+              LIVE
+            </span>
+          )}
+        </span>
         {sublabel && <span className={styles.sublabel}>{sublabel}</span>}
       </div>
 

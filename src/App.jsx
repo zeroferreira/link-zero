@@ -77,6 +77,13 @@ export default function App() {
     return delays;
   }, []); // sections is static — no need to recompute
 
+  const handleScrollDown = () => {
+    const el = document.querySelector('.section-wrapper');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <>
       {/* ── Background layers ── */}
@@ -114,6 +121,16 @@ export default function App() {
           <QuickSocials socials={profile.socials} />
         </div>
 
+        {/* Scroll invitation */}
+        <div className="scroll-invitation" onClick={handleScrollDown} role="button" aria-label="Deslizar para ver más">
+          <span className="scroll-text">Desliza para ver más</span>
+          <div className="scroll-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+
         {/* Link sections */}
         {sections.map((section) => (
           <div key={section.id} className="section-wrapper">
@@ -134,6 +151,7 @@ export default function App() {
                           theme={link.theme}
                           animDelay={buttonDelays[link.id]}
                           compact={true}
+                          live={link.id === 'live-tops' && isLive}
                         />
                       ))}
                     </div>
@@ -149,6 +167,7 @@ export default function App() {
                     icon={linkOrRow.icon}
                     theme={linkOrRow.theme}
                     animDelay={buttonDelays[linkOrRow.id]}
+                    live={linkOrRow.id === 'live-tops' && isLive}
                   />
                 );
               })}

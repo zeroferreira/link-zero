@@ -335,3 +335,57 @@
     opacity: 0;
   }
 }
+
+/* ─── LIVE Indicator inside Button ─── */
+.liveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ff5b5b;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+}
+
+.liveDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 6px #ef4444;
+  animation: pulseLiveDot 1.2s ease-in-out infinite;
+}
+
+@keyframes pulseLiveDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ─── LIVE Glow effect for the button ─── */
+.liveGlow {
+  border-color: rgba(239, 68, 68, 0.48) !important;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  animation: borderPulseRed 3s ease-in-out infinite !important;
+}
+
+@keyframes borderPulseRed {
+  0% {
+    box-shadow: 0 2px 14px rgba(0,0,0,0.36), 0 0 4px rgba(239, 68, 68, 0.16);
+    border-color: rgba(239, 68, 68, 0.20);
+  }
+  50% {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.42), 0 0 14px rgba(239, 68, 68, 0.45);
+    border-color: rgba(239, 68, 68, 0.48);
+  }
+  100% {
+    box-shadow: 0 2px 14px rgba(0,0,0,0.36), 0 0 4px rgba(239, 68, 68, 0.16);
+    border-color: rgba(239, 68, 68, 0.20);
+  }
+}
