@@ -151,7 +151,7 @@ export default function App() {
                           theme={link.theme}
                           animDelay={buttonDelays[link.id]}
                           compact={true}
-                          live={link.id === 'live-tops' && isLive}
+                          live={isLive && section.id === 'live'}
                         />
                       ))}
                     </div>
@@ -167,7 +167,7 @@ export default function App() {
                     icon={linkOrRow.icon}
                     theme={linkOrRow.theme}
                     animDelay={buttonDelays[linkOrRow.id]}
-                    live={linkOrRow.id === 'live-tops' && isLive}
+                    live={isLive && section.id === 'live'}
                   />
                 );
               })}
