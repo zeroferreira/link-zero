@@ -1,7 +1,9 @@
 import icons from './icons';
 import styles from './QuickSocials.module.css';
 
-export default function QuickSocials({ socials = [] }) {
+const DEFAULT_SOCIALS = [];
+
+export default function QuickSocials({ socials = DEFAULT_SOCIALS }) {
   if (!socials || socials.length === 0) return null;
 
   return (

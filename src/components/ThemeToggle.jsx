@@ -30,6 +30,7 @@ export default function ThemeToggle({ theme, onToggle }) {
 
   return (
     <button
+      type="button"
       className={`${styles.toggle} ${isDark ? styles.modeDark : styles.modeWarm}`}
       onClick={onToggle}
       aria-label={isDark ? 'Cambiar a tema sunset' : 'Cambiar a tema oscuro'}

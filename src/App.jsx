@@ -14,6 +14,27 @@ import './App.css';
 const BASE_DELAY   = 0.28; // seconds before first button appears
 const STAGGER_STEP = 0.07; // seconds between buttons
 
+const handleScrollDown = () => {
+  const el = document.querySelector('.section-wrapper');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+const fetchLiveStatus = async (signal) => {
+  try {
+    const res = await fetch('https://firestore.googleapis.com/v1/projects/zero-strom-web/databases/(default)/documents/system/status', { signal });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return data?.fields?.isLive?.booleanValue ?? false;
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      console.error('Error checking TikTok live status:', err);
+    }
+    return false;
+  }
+};
+
 export default function App() {
   // ── Theme (#4) ──
   const [theme, setTheme] = useState(() => {
@@ -36,23 +57,19 @@ export default function App() {
 
   useEffect(() => {
     let active = true;
+    const controller = new AbortController();
+
     async function checkLiveStatus() {
-      try {
-        const res = await fetch('https://firestore.googleapis.com/v1/projects/zero-strom-web/databases/(default)/documents/system/status');
-        if (!res.ok) return;
-        const data = await res.json();
-        const live = data?.fields?.isLive?.booleanValue ?? false;
-        if (active) {
-          setIsLive(live);
-        }
-      } catch (err) {
-        console.error('Error checking TikTok live status:', err);
+      const live = await fetchLiveStatus(controller.signal);
+      if (active) {
+        setIsLive(live);
       }
     }
     checkLiveStatus();
     const interval = setInterval(checkLiveStatus, 20000); // Check status every 20 seconds
     return () => {
       active = false;
+      controller.abort();
       clearInterval(interval);
     };
   }, []);
@@ -76,13 +93,6 @@ export default function App() {
     });
     return delays;
   }, []); // sections is static — no need to recompute
-
-  const handleScrollDown = () => {
-    const el = document.querySelector('.section-wrapper');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   return (
     <>
@@ -122,56 +132,60 @@ export default function App() {
         </div>
 
         {/* Scroll invitation */}
-        <div className="scroll-invitation" onClick={handleScrollDown} role="button" aria-label="Deslizar para ver más">
+        <button className="scroll-invitation" onClick={handleScrollDown} type="button" aria-label="Deslizar para ver más">
           <span className="scroll-text">Desliza para ver más</span>
           <div className="scroll-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </div>
-        </div>
+        </button>
 
         {/* Link sections */}
         {sections.map((section) => (
           <div key={section.id} className="section-wrapper">
             <SectionLabel>{section.label}</SectionLabel>
 
-            <div className="links-group" role="list" aria-label={`Links de ${section.label}`}>
+            <ul className="links-group" aria-label={`Links de ${section.label}`}>
               {section.links.map((linkOrRow) => {
                 if (linkOrRow.type === 'row') {
                   return (
-                    <div key={linkOrRow.id} className="links-row" role="group">
-                      {linkOrRow.items.map((link) => (
-                        <LinkButton
-                          key={link.id}
-                          href={link.href}
-                          label={link.label}
-                          sublabel={link.sublabel}
-                          icon={link.icon}
-                          theme={link.theme}
-                          animDelay={buttonDelays[link.id]}
-                          compact={true}
-                          live={isLive && section.id === 'live'}
-                        />
-                      ))}
-                    </div>
+                    <li key={linkOrRow.id} style={{ width: '100%' }}>
+                      <div className="links-row" role="group">
+                        {linkOrRow.items.map((link) => (
+                          <LinkButton
+                            key={link.id}
+                            href={link.href}
+                            label={link.label}
+                            sublabel={link.sublabel}
+                            icon={link.icon}
+                            theme={link.theme}
+                            animDelay={buttonDelays[link.id]}
+                            compact={true}
+                            live={isLive && section.id === 'live'}
+                          />
+                        ))}
+                      </div>
+                    </li>
                   );
                 }
 
                 return (
-                  <LinkButton
-                    key={linkOrRow.id}
-                    href={linkOrRow.href}
-                    label={linkOrRow.label}
-                    sublabel={linkOrRow.sublabel}
-                    icon={linkOrRow.icon}
-                    theme={linkOrRow.theme}
-                    animDelay={buttonDelays[linkOrRow.id]}
-                    live={isLive && section.id === 'live'}
-                  />
+                  <li key={linkOrRow.id} style={{ width: '100%' }}>
+                    <LinkButton
+                      key={linkOrRow.id}
+                      href={linkOrRow.href}
+                      label={linkOrRow.label}
+                      sublabel={linkOrRow.sublabel}
+                      icon={linkOrRow.icon}
+                      theme={linkOrRow.theme}
+                      animDelay={buttonDelays[linkOrRow.id]}
+                      live={isLive && section.id === 'live'}
+                    />
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
         ))}
 

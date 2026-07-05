@@ -155,6 +155,7 @@ export default function ParticleCanvas({ theme = 'dark' }) {
       ref={canvasRef}
       id="orb-background"
       aria-hidden="true"
+      tabIndex={-1}
       style={{
         position: 'fixed',
         inset: 0,
