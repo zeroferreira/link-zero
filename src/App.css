@@ -322,6 +322,42 @@ body {
   }
 }
 
+
+/* ── Live Section Badge ── */
+.section-label-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(239, 68, 68, 0.15) !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  padding: 3px 6px !important;
+  border-radius: 4px !important;
+  color: #ff3b30 !important;
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.8px !important;
+  text-shadow: 0 0 6px rgba(239, 68, 68, 0.3) !important;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.1) !important;
+  vertical-align: middle;
+  line-height: 1 !important;
+  margin-left: 2px;
+}
+
+.live-section-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff3b30;
+  box-shadow: 0 0 6px #ff3b30;
+  animation: pulseNeon 1.5s infinite alternate;
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   * {

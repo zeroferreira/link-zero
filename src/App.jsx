@@ -144,7 +144,17 @@ export default function App() {
         {/* Link sections */}
         {sections.map((section) => (
           <div key={section.id} className="section-wrapper">
-            <SectionLabel>{section.label}</SectionLabel>
+            <SectionLabel>
+              <span className="section-label-inner">
+                {section.label}
+                {section.id === 'live' && isLive && (
+                  <span className="live-section-badge">
+                    <span className="live-section-dot" />
+                    <span>EN VIVO</span>
+                  </span>
+                )}
+              </span>
+            </SectionLabel>
 
             <ul className="links-group" aria-label={`Links de ${section.label}`}>
               {section.links.map((linkOrRow) => {
