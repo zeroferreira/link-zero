@@ -49,6 +49,18 @@
   justify-content: center;
   width: 20px;
   height: 20px;
+  animation: bobIcon 2.8s ease-in-out infinite;
+}
+
+.socialLink:nth-child(1) .iconBox { animation-delay: 0s; }
+.socialLink:nth-child(2) .iconBox { animation-delay: 0.22s; }
+.socialLink:nth-child(3) .iconBox { animation-delay: 0.44s; }
+.socialLink:nth-child(4) .iconBox { animation-delay: 0.66s; }
+.socialLink:nth-child(5) .iconBox { animation-delay: 0.88s; }
+
+@keyframes bobIcon {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
 }
 
 .iconBox svg {
@@ -69,7 +81,7 @@
 .socialLink:hover .iconBox svg {
   opacity: 1;
   fill: #fff;
-  transform: scale(1.05);
+  transform: scale(1.12) rotate(8deg);
 }
 
 .socialLink:active {
