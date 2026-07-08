@@ -48,7 +48,7 @@ export default function LinkButton({ href, label, sublabel, icon, theme, animDel
   const themeClass = styles[`theme--${theme}`] ?? '';
   const compactClass = compact ? styles.compact : '';
   const visibleClass = isVisible ? styles.visible : '';
-  const liveClass = live ? styles.liveGlow : '';
+  const liveClass = (live === 'live' || live === true) ? styles.liveGlow : '';
 
   return (
     <a
@@ -94,9 +94,9 @@ export default function LinkButton({ href, label, sublabel, icon, theme, animDel
         <span className={styles.label}>
           {label}
           {live && (
-            <span className={styles.liveIndicator}>
+            <span className={`${styles.liveIndicator} ${live === 'offline' ? styles.offline : ''}`}>
               <span className={styles.liveDot} />
-              LIVE
+              <span>LIVE</span>
             </span>
           )}
         </span>

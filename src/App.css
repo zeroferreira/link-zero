@@ -155,7 +155,7 @@ body {
   transform: translateY(22px);
   animation: 
     cardFadeIn 0.65s cubic-bezier(.22,1,.36,1) forwards,
-    floatCard 6s ease-in-out infinite 0.65s;
+    floatCard 4.8s ease-in-out infinite 0.65s;
 
   /* Smooth theme transitions (background/border only — transform is driven by animation) */
   transition: background 0.55s ease, border-color 0.55s ease;
@@ -172,9 +172,9 @@ body {
 }
 
 @keyframes floatCard {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
+  0%   { transform: translateY(0) scale(1) rotate(0deg); }
+  50%  { transform: translateY(-9px) scale(1.008) rotate(0.4deg); }
+  100% { transform: translateY(0) scale(1) rotate(0deg); }
 }
 
 /* Glass shine on top of card */

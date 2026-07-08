@@ -172,7 +172,7 @@ export default function App() {
                             theme={link.theme}
                             animDelay={buttonDelays[link.id]}
                             compact={true}
-                            live={isLive && section.id === 'live'}
+                            live={section.id === 'live' ? (isLive ? 'live' : 'offline') : null}
                           />
                         ))}
                       </div>
@@ -190,7 +190,7 @@ export default function App() {
                       icon={linkOrRow.icon}
                       theme={linkOrRow.theme}
                       animDelay={buttonDelays[linkOrRow.id]}
-                      live={isLive && section.id === 'live'}
+                      live={section.id === 'live' ? (isLive ? 'live' : 'offline') : null}
                     />
                   </li>
                 );

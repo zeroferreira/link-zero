@@ -368,6 +368,19 @@
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
+
+.liveIndicator.offline {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.liveIndicator.offline .liveDot {
+  background: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
 /* ─── LIVE Glow effect for the button ─── */
 .liveGlow {
   border-color: rgba(239, 68, 68, 0.48) !important;
