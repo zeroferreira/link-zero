@@ -121,6 +121,17 @@
   50%      { opacity: 0.2; }
 }
 
+.live.offline {
+  background: linear-gradient(135deg, #4b5563, #374151);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  border-color: #0b1523;
+}
+
+.live.offline::before {
+  background: #9ca3af;
+  animation: none;
+}
+
 /* Mobile */
 @media (max-width: 420px) {
   .ring { width: 96px; height: 96px; }

@@ -25,11 +25,9 @@ export default function Avatar({ src, name, live = false }) {
         </div>
       </div>
 
-      {live && (
-        <div className={styles.live} aria-label="En vivo">
-          LIVE
-        </div>
-      )}
+      <div className={`${styles.live} ${!live ? styles.offline : ''}`} aria-label={live ? "En vivo" : "Desconectado"}>
+        LIVE
+      </div>
     </div>
   );
 }

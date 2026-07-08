@@ -97,6 +97,11 @@
   box-shadow: 0 8px 24px rgba(255, 0, 80, 0.28);
 }
 
+.theme--gamepad:hover {
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.28);
+}
+
 /* Media Query */
 @media (max-width: 480px) {
   .socialsBar {
