@@ -93,8 +93,8 @@ export default function LinkButton({ href, label, sublabel, icon, theme, animDel
       <div className={styles.text}>
         <span className={styles.label}>
           {label}
-          {live && (
-            <span className={`${styles.liveIndicator} ${live === 'offline' ? styles.offline : ''}`}>
+          {live === 'live' && (
+            <span className={styles.liveIndicator}>
               <span className={styles.liveDot} />
               <span>LIVE</span>
             </span>
