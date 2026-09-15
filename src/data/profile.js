@@ -8,7 +8,7 @@ export const profile = {
   name:   'Zero FM',
   handle: '@zeroferreira',
   bio:    'Baterista · Streamer · Gamer\nMúsica, vibes y gaming desde México 🎧🎮🇲🇽',
-  avatar: '/logo.webp',
+  avatar: '/logo-nuevo.png',
   // live:   false,    // ← [DEPRECATED] Ahora se maneja dinámicamente con tu Bot de TikTok
   // liveUrl: 'https://www.youtube.com/@zer0ferreira', // ← [DEPRECATED] Apunta a TikTok Live automáticamente cuando estás en vivo
 
