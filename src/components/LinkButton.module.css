@@ -22,8 +22,8 @@
     0 2px 14px rgba(0,0,0,0.36),
     inset 0 1px 0 rgba(255,255,255,0.08);
 
-  /* Entrance animation (triggered via IntersectionObserver) */
-  opacity: 0;
+  /* Base opacity is 1 so buttons never disappear or leave empty gaps */
+  opacity: 1;
 
   transition:
     transform 0.18s cubic-bezier(.34,1.56,.64,1),
@@ -37,7 +37,7 @@
 }
 
 .visible {
-  animation: fadeUp 0.52s cubic-bezier(.22,1,.36,1) forwards;
+  animation: fadeUp 0.52s cubic-bezier(.22,1,.36,1) backwards;
 }
 
 /* Compact layout for side-by-side buttons */
@@ -169,13 +169,12 @@
   box-shadow: 0 4px 18px rgba(0,0,0,0.40);
 }
 .theme--tiktok-music {
-  border-color: rgba(255,55,95,0.22);
-  animation: fadeUp 0.52s cubic-bezier(.22,1,.36,1) forwards, borderPulse 4.5s ease-in-out infinite 0.52s;
+  border-color: rgba(255, 55, 95, 0.35);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.36), 0 0 10px rgba(255, 0, 80, 0.20);
 }
 .theme--tiktok-music:hover {
-  border-color: rgba(255,55,95,0.45);
-  box-shadow: 0 14px 40px rgba(255,0,80,0.26), inset 0 1px 0 rgba(255,255,255,0.1);
-  animation-play-state: paused;
+  border-color: rgba(255, 55, 95, 0.55);
+  box-shadow: 0 14px 40px rgba(255, 0, 80, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* TikTok Gaming */

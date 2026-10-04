@@ -25,9 +25,9 @@
   cursor: pointer;
   text-decoration: none;
   
-  /* Entrance animation */
-  opacity: 0;
-  animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) forwards;
+  /* Entrance animation - base opacity 1 so it never fails on mobile/reduced-motion */
+  opacity: 1;
+  animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) backwards;
   
   transition: 
     transform 0.18s cubic-bezier(.34,1.56,.64,1),
