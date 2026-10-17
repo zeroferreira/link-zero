@@ -132,7 +132,7 @@ export const sections = [
         id:       'discord',
         label:    '¡Únete a la comunidad!',
         sublabel: 'Gaming, música, humor, y más.',
-        href:     'https://discord.gg/Hf6pQzGu',
+        href:     'https://discord.gg/vYE3qwPD6',
         icon:     'discord',
         theme:    'discord',
       },
